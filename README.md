@@ -19,3 +19,5 @@ Para ejecutar el test con el test por defecto:
 Para ejecutar el test con otro test:
 
     docker run --env TEST=test_long.py spacyexample-test
+
+También se pueden usar los scripts en `scripts/`

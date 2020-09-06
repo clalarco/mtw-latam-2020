@@ -132,4 +132,4 @@ dmypy.json
 # Docker
 Dockerfile
 *.Dockerfile
-.dockerignore
+.dockerignore.idea

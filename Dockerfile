@@ -22,4 +22,5 @@ COPY src/setup.py  .
 COPY src/spacyexample ./spacyexample
 RUN pip install .
 
-RUN python -m spacy download es_core_news_lg
+# RUN python -m spacy download es_core_news_lg
+RUN python -m spacy download es_core_news_md

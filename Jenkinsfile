@@ -11,10 +11,10 @@ pipeline {
           sh 'pytest --junit-xml results.xml test_1.py test_long.py'
       }
     }
-    post {
-      always {
-        junit 'results.xml'
-      }
+  }
+  post {
+    always {
+      junit 'results.xml'
     }
   }
 }

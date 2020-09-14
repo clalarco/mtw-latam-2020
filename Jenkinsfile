@@ -1,19 +1,20 @@
-pipeline {
-  agent {
-    docker {
-        image 'spacyexample-test'
-    }
+node {
+  def dockerContainer = ""
+  stage("Start Docker container and Run Tests") {
+    dockerContainer = sh(script: "docker run -d spacyexample-test ./run-junit.sh", returnStdout: true).trim()
   }
-  stages {
-    stage('Run Tests') {
-      steps {
-          sh 'pytest --junit-xml results.xml test_1.py test_long.py'
-      }
+  stage("Wait for Results") {
+    retry(10) {
+      sleep (time: 10, unit: 'SECONDS')
+      sh "docker exec $dockerContainer ls results.xml"
     }
+    // Once finished, we copy the results file.
+    sh "docker cp $dockerContainer:/usr/src/app/tests/results.xml $WORKSPACE"
   }
-  post {
-    always {
-      junit 'results.xml'
-    }
+  stage("Stop Container") {
+    sh "docker stop $dockerContainer"
+  }
+  stage("Publish results") {
+    junit "results.xml"
   }
 }

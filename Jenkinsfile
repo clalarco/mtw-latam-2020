@@ -2,7 +2,6 @@ pipeline {
   agent {
     docker {
         image 'spacyexample-test'
-        label 'spacyexample-test'
     }
   }
   stages {

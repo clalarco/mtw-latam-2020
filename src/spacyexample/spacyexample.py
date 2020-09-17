@@ -5,7 +5,7 @@ import spacy
 class SpacyExample:
 
     def __init__(self):
-        self.nlp = spacy.load("es_core_news_md")
+        self.nlp = spacy.load(getenv("SPACY_CORE", "es_core_news_sm"))
 
     def parse(self, phrase):
         doc = self.nlp(phrase)
